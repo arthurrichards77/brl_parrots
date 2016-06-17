@@ -1,0 +1,11 @@
+<launch>	
+
+  <param name="robot_description" textfile="$(find aapacs_drones)/urdf/drone.urdf" />
+
+  <node name="targetsim" pkg="aapacs_drones" type="virtual_drone.py" />
+
+  <node name="controlpanel" pkg="aapacs_drones" type="drone_panel.py" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+</launch>

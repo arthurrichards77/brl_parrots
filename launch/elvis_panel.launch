@@ -1,0 +1,35 @@
+<launch>
+
+  <group ns = "elvis">
+
+    <node name="driver" pkg="ardrone_autonomy" type="ardrone_driver" args="-ip 192.168.10.75" />
+
+    <node name="teleop" pkg="aapacs_drones" type="drone_teleop.py" output="screen">
+      <remap from="cmd_vel" to="ref_vel" />
+    </node>
+
+    <node name="controlpanel" pkg="aapacs_drones" type="drone_giu.py" />
+
+    <node name="autoland" pkg="aapacs_drones" type="simple_autoland.py" />
+
+    <node name="control" pkg="aapacs_drones" type="vicon_control.py">
+      <remap from="drone" to="/vicon/Elvis/Elvis" />
+      <remap from="cmd_vel" to="control_vel" />
+      <param name="kpx" value="0.6" />
+      <param name="kdx" value="0.3" />
+      <param name="kpy" value="0.6" />
+      <param name="kdy" value="0.3" />
+      <param name="kpz" value="0.8" />
+    </node>
+
+    <node name="reflex" pkg="aapacs_drones" type="collision_reflex.py" output="screen">
+      <remap from="drone" to="/vicon/Elvis/Elvis" />
+    </node>
+
+    <!--<node name="viewer" pkg="aapacs_drones" type="drone_monitor.py">-->
+      <!--<remap from="image" to="/elvis/ardrone/image_raw" />-->
+    <!--</node>-->
+
+  </group>
+
+</launch>

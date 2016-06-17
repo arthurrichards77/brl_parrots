@@ -1,0 +1,7 @@
+<launch>
+
+    <arg name="drone_ip" />
+
+    <node name="driver" pkg="ardrone_autonomy" type="ardrone_driver" args="-ip $(arg drone_ip)" respawn="true" />    	  
+
+</launch>

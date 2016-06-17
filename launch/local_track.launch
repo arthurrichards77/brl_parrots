@@ -1,0 +1,18 @@
+<launch>	
+
+    <node name="driver" pkg="ardrone_autonomy" type="ardrone_driver">    	
+    	  <param name="detect_type" value="10" />
+	  <param name="enemy_colors" value="3" />
+	  <param name="detections_select_h" value="32" />
+	  <param name="detections_select_v_hsync" value="128" />
+	  <param name="enemy_without_shell" value="1" />
+    </node>
+
+    <node name="teleop" pkg="drone_teleop" type="drone_teleop.py" output="screen"/>
+    <node name="controlpanel" pkg="aapacs_drones" type="drone_panel.py" />
+    
+    <node name="viewer" pkg="aapacs_drones" type="viewdronetrack.py">
+      <remap from="image" to="ardrone/image_raw" />
+    </node>
+
+</launch>

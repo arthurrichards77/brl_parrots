@@ -1,0 +1,100 @@
+<launch>
+
+  <include file="$(find vicon_bridge)/launch/vicon.launch" />
+
+  <node name="controller" pkg="aapacs_drones" type="quad_controller.py">
+    <remap from="drone" to="/vicon/PelicanGreen/PelicanGreen" />
+
+    <param name="is_pelican" type="bool" value="1" />
+    <param name="control_rate" type="double" value="50" />
+
+    <param name="pid/roll/init_gains/kp" type="double" value="0.15" />
+    <param name="pid/roll/init_gains/ki" type="double" value="0.03" />
+    <param name="pid/roll/init_gains/kd" type="double" value="0.4" />
+
+    <param name="pid/pitch/init_gains/kp" type="double" value="0.15" />
+    <param name="pid/pitch/init_gains/ki" type="double" value="0.05" />
+    <param name="pid/pitch/init_gains/kd" type="double" value="0.4" />
+
+    <param name="pid/thrust/init_gains/kp" type="double" value="0.14" />
+    <param name="pid/thrust/init_gains/ki" type="double" value="0.0" />
+    <param name="pid/thrust/init_gains/kd" type="double" value="0.14" />
+
+    <param name="pid/yaw/init_gains/kp" type="double" value="0.1" />
+    <param name="pid/yaw/init_gains/ki" type="double" value="0.0" />
+    <param name="pid/yaw/init_gains/kd" type="double" value="0.025" />
+
+    <param name="pid/pitch/reverse" type="bool" value="1" />
+    <param name="pid/roll/reverse" type="bool" value="0" />
+    <param name="pid/thrust/reverse" type="bool" value="0" />
+    <param name="pid/yaw/reverse" type="bool" value="1" />
+
+    <param name="autoland/thrustdz" type="double" value="-0.03" />
+
+    <param name="neutral/roll" type="double" value="0" />
+    <param name="neutral/pitch" type="double" value="0" />
+    <param name="neutral/thrust" type="double" value="0.14" />
+    <param name="neutral/yaw" type="double" value="0" />
+
+    <param name="altitudes/zero" type="double" value="0.20" />
+    <param name="altitudes/land_target" type="double" value="0.21" />
+    <param name="altitudes/spooldown" type="double" value="0.23" />
+
+    <param name="ground_effect/maxalt" type="double" value="0.5" />
+    <param name="ground_effect/thrscale" type="double" value="0.2" />
+
+    <param name="arming/thrust" type="double" value="-1" />
+    <param name="arming/yaw" type="double" value="1" />
+
+    <param name="disarming/thrust" type="double" value="-1" />
+    <param name="disarming/yaw" type="double" value="0" />
+
+    <param name="home/x" type="double" value="0" />
+    <param name="home/y" type="double" value="0" />
+    <param name="home/z" type="double" value="0.8" />
+    <param name="home/yaw" type="double" value="0" />
+
+    <param name="fence/min_x" type="double" value="-2" />
+    <param name="fence/max_x" type="double" value="2" />
+    <param name="fence/min_y" type="double" value="-3" />
+    <param name="fence/max_y" type="double" value="3" />
+    <param name="fence/min_z" type="double" value="0" />
+    <param name="fence/max_z" type="double" value="1.5" />
+    <param name="fence/rel_threshold" type="double" value="2.5" />
+
+  </node>
+
+  <node name="CommandPanel" pkg="aapacs_drones" type="quad_command.py"/>
+
+  #### Asctec Autopilot ###################################
+
+  <node pkg="asctec_autopilot" type="autopilot_node" name="AutoPilot"
+    output="screen">
+
+    <param name="port" type="string" value="/dev/ttyUSB0"/>
+    <param name="speed" type="int" value="57600"/>
+    <param name="freq" type="double" value="5.0"/>
+
+    <param name="enable_IMU_CALCDATA" type="bool" value="true"/>
+    <param name="interval_IMU_CALCDATA" type="int" value="1"/>
+    <param name="offset_IMU_CALCDATA" type="int" value="0"/>
+
+    <param name="enable_LL_STATUS" type="bool" value="true"/>
+    <param name="interval_LL_STATUS" type="int" value="2"/>
+    <param name="offset_LL_STATUS" type="int" value="0"/>
+
+    <param name="enable_CONTROLLER_OUTPUT" type="bool" value="true"/>
+
+    <param name="enable_CONTROL" type="bool" value="true"/>
+
+    <param name="enable_RC_DATA" type="bool" value="true"/>
+
+  </node>
+
+  <node name="RefSender" pkg="aapacs_drones" type="send_ref.py"/>
+  <node name="Bridge" pkg="aapacs_pelican" type="pelican_bridge.py">
+    <remap from="pelican_ctrl" to="/rcctrl" />
+  </node>
+
+</launch>
+  

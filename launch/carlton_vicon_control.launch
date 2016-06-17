@@ -1,0 +1,14 @@
+<launch>
+  <group ns = "carlton">
+    <node name="driver" pkg="ardrone_autonomy" type="ardrone_driver" args="-ip 192.168.10.73"/>
+    <node name="teleop" pkg="aapacs_drones" type="drone_teleop.py" output="screen">
+      <remap from="cmd_vel" to="ref_vel" />
+    </node>
+    <node name="control" pkg="aapacs_drones" type="vicon_control.py">
+      <remap from="drone" to="/vicon/Carlton/Carlton" />
+    </node>
+    <node name="viewer" pkg="aapacs_drones" type="drone_monitor.py">
+      <remap from="image" to="/carlton/ardrone/image_raw" />
+    </node>
+  </group>
+</launch>

@@ -1,0 +1,22 @@
+<launch>
+    <arg name="use1" default="true" />
+    <arg name="name1" default="drone" />
+
+    <arg name="use2" default="false" />
+    <arg name="name2" default="drone2" />
+
+    <arg name="use3" default="false" />
+    <arg name="name3" default="drone3" />
+
+    <arg name="use4" default="false" />
+    <arg name="name4" default="drone4" />
+
+    <arg name="use5" default="false" />
+    <arg name="name5" default="drone5" />
+
+    <arg name="use6" default="false" />
+    <arg name="name6" default="drone6" />
+
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find aapacs_drones)/urdf/multi_drones.urdf.xacro use1:=$(arg use1) name1:=$(arg name1) use2:=$(arg use2) name2:=$(arg name2) use3:=$(arg use3) name3:=$(arg name3) use4:=$(arg use4) name4:=$(arg name4) use5:=$(arg use5) name5:=$(arg name5) use6:=$(arg use6) name6:=$(arg name6)" />
+
+</launch>

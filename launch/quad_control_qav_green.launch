@@ -1,0 +1,73 @@
+<launch>
+
+  <include file="$(find vicon_bridge)/launch/vicon.launch" />
+
+  <node name="controller" pkg="aapacs_drones" type="quad_controller.py">
+    <remap from="drone" to="/vicon/QAV_GREEN/QAV_GREEN" />
+
+    <param name="pid/roll/init_gains/kp" type="double" value="0.22" />
+    <param name="pid/roll/init_gains/ki" type="double" value="0.04" />
+    <param name="pid/roll/init_gains/kd" type="double" value="0.28" />
+
+    <param name="pid/pitch/init_gains/kp" type="double" value="0.22" />
+    <param name="pid/pitch/init_gains/ki" type="double" value="0.04" />
+    <param name="pid/pitch/init_gains/kd" type="double" value="0.28" />
+
+    <param name="pid/thrust/init_gains/kp" type="double" value="0.4" />
+    <param name="pid/thrust/init_gains/ki" type="double" value="0.06" />
+    <param name="pid/thrust/init_gains/kd" type="double" value="0.36" />
+
+    <param name="pid/yaw/init_gains/kp" type="double" value="0.5" />
+    <param name="pid/yaw/init_gains/ki" type="double" value="0.0" />
+    <param name="pid/yaw/init_gains/kd" type="double" value="0.0" />
+
+    <param name="pid/roll/reverse" type="bool" value="0" />
+    <param name="pid/pitch/reverse" type="bool" value="0" />
+    <param name="pid/thrust/reverse" type="bool" value="0" />
+    <param name="pid/yaw/reverse" type="bool" value="1" />
+
+    <param name="autoland/thrustdz" type="double" value="-0.03" />
+
+    <param name="neutral/roll" type="double" value="0" />
+    <param name="neutral/pitch" type="double" value="0.15" />
+    <param name="neutral/thrust" type="double" value="0.1" />
+    <param name="neutral/yaw" type="double" value="0" />
+
+    <param name="altitudes/zero" type="double" value="0.12" />
+    <param name="altitudes/land_target" type="double" value="0.14" />
+    <param name="altitudes/spooldown" type="double" value="0.16" />
+
+    <param name="ground_effect/maxalt" type="double" value="0.3" />
+    <param name="ground_effect/thrscale" type="double" value="0.4" />
+
+    <param name="arming/thrust" type="double" value="-1" />
+    <param name="arming/yaw" type="double" value="1" />
+
+    <param name="disarming/thrust" type="double" value="-1" />
+    <param name="disarming/yaw" type="double" value="-1" />
+
+    <param name="home/x" type="double" value="0" />
+    <param name="home/y" type="double" value="0" />
+    <param name="home/z" type="double" value="0.8" />
+    <param name="home/yaw" type="double" value="0" />
+
+    <param name="fence/min_x" type="double" value="-2.5" />
+    <param name="fence/max_x" type="double" value="2" />
+    <param name="fence/min_y" type="double" value="-3" />
+    <param name="fence/max_y" type="double" value="3.5" />
+    <param name="fence/min_z" type="double" value="0" />
+    <param name="fence/max_z" type="double" value="2" />
+    <param name="fence/rel_threshold" type="double" value="2.5" />
+
+  </node>
+
+  <node name="RefSender" pkg="aapacs_drones" type="send_ref.py"/>
+  <node name="CommandPanel" pkg="aapacs_drones" type="quad_command.py"/>
+  <node name="Bridge" pkg="rcbridge" type="quadrcbridge.py">
+    <rosparam param="failsafe">[0.5, 0.5, 0.0, 0.0, 0.5, 0.5, 0.5, 0.5]</rosparam>
+    <param name="udpport" value="27200" />
+    <param name="ipaddr" type="string" value="192.168.10.173" />
+  </node>
+
+</launch>
+  

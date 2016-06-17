@@ -1,0 +1,5 @@
+<launch>
+  <node name="optflow_to_twist" pkg="aapacs_drones" type="optflow_to_twist.py">
+    <remap from="opticflow_vel" to="/colin/cmd_vel" />
+  </node>
+</launch>

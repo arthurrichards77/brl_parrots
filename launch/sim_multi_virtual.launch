@@ -1,0 +1,44 @@
+<launch>	
+
+  <arg name="panels" default="true" />
+
+  <include file="$(find aapacs_drones)/launch/setup_multi_urdf.launch">
+
+          <!-- always using drone 1 -->
+          <arg name="name1" value="archie" />
+
+          <arg name="use2" value="true" />
+          <arg name="name2" value="bernard" />
+
+          <arg name="use3" value="true" />
+          <arg name="name3" value="carlton" />
+
+  </include>
+
+  <include file="$(find aapacs_drones)/launch/single_virtual.launch">
+    <arg name="drone_name" value="archie" />
+    <arg name="use_panel" value="$(arg panels)" />
+  </include>
+
+  <include file="$(find aapacs_drones)/launch/single_virtual.launch">
+    <arg name="drone_name" value="bernard" />
+    <arg name="use_panel" value="$(arg panels)" />
+  </include>
+
+  <include file="$(find aapacs_drones)/launch/single_virtual.launch">
+    <arg name="drone_name" value="carlton" />
+    <arg name="use_panel" value="$(arg panels)" />
+  </include>
+
+  <param name="default_trajectory_folder"  value="$(find aapacs_drones)/launch" />
+  <node name="traj_gui" pkg="aapacs_drones" type="csv_trajectory_gui.py" />
+
+  <param name="use_gui" value="false"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <rosparam param="source_list">["archie/joint_states", "bernard/joint_states", "carlton/joint_states"]</rosparam>
+  </node>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+
+</launch>

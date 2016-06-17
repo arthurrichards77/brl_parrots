@@ -1,0 +1,14 @@
+<launch>
+  <group ns = "brenda">
+    <node name="driver" pkg="ardrone_autonomy" type="ardrone_driver" args="-ip 192.168.10.72"/>
+    <node name="teleop" pkg="drone_teleop" type="drone_teleop.py" output="screen">
+      <remap from="cmd_vel" to="ref_vel" />
+    </node>
+    <node name="control" pkg="aapacs_drones" type="vicon_control.py">
+      <remap from="drone" to="/vicon/Brenda/Brenda" />
+    </node>
+    <node name="viewer" pkg="aapacs_drones" type="drone_monitor.py">
+      <remap from="image" to="/brenda/ardrone/image_raw" />
+    </node>
+  </group>
+</launch>
