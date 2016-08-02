@@ -1,3 +1,0 @@
-<launch>
-  <node pkg="rxtools" name="posplot" type="rxplot" args="/rcctrl/data[0], /rcctrl/data[1], /rcctrl/data[2], /rcctrl/data[3] --ymin=0 --ymax=1"/>
-</launch>
