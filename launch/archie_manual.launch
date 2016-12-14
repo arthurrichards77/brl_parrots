@@ -1,0 +1,15 @@
+<launch>
+
+  <arg name="panel" default="True" />
+
+  <arg name="image" default="False" />
+
+  <include file="$(find brl_parrots)/launch/basic_drone.launch" pass_all_args="true">
+
+    <arg name="drone_name" value="archie" />
+
+    <arg name="drone_ip" value="192.168.10.71" />
+
+  </include>
+
+</launch>
