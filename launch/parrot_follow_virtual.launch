@@ -28,7 +28,7 @@
 
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find brl_drones)/urdf/single_drone.urdf.xacro'" />
 
-  <include file="$(find brl_parrots)/launch/parrot_follow_tf.launch">
+  <include file="$(find brl_parrots)/launch/drone_follow_tf.launch">
     <arg name="panel" value="True" />
     <arg name="image" value="False" />
     <arg name="drone_name" value="archie" />
