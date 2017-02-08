@@ -1,0 +1,21 @@
+<launch>
+
+    <!-- default settings are for direct connection to ardrone -->
+    <arg name="drone_name" default="ardrone" />
+    <arg name="drone_ip" default="192.168.1.1" />
+
+    <!-- options: turn off control panel or turn on image viewer -->
+    <arg name="panel" default="True" />
+    <arg name="image" default="False" />
+
+    <node name="driver" pkg="ardrone_autonomy" type="ardrone_driver" args="-ip $(arg drone_ip)" respawn="true" />
+
+    <!-- name parameter used for panel title - useful if multiple drones in action -->
+    <param name="drone_name" value="$(arg drone_name)"/>
+    <node name="panel" pkg="brl_drones" type="drone_panel.py" if="$(arg panel)" />
+
+    <node name="image" pkg="image_view" type="image_view" if="$(arg image)">
+        <remap from="image" to="ardrone/image_raw" />
+    </node>
+
+</launch>

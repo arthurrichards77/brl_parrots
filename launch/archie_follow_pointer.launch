@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find brl_parrots)/launch/ardrone_follow_pointer.launch">
+    <arg name="drone_ip" value="192.168.10.71" />
+    <arg name="drone_frame" value="/vicon/Archie/Archie" />
+  </include>
+
+</launch>

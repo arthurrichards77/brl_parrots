@@ -1,30 +1,27 @@
 <launch>
 
+  <!-- compulsory args: must supply the IP address, the TF for the drone and the TF for the target -->
+  <arg name="drone_ip" />
+  <arg name="drone_frame" />
+  <arg name="target_frame" />
+
+  <!-- optional args: can turn off control panel, turn on image viewer, turn on PID tuning, and give the drone a name -->
   <arg name="panel" default="True" />
-
   <arg name="image" default="False" />
+  <arg name="tuning" default="False" />
+  <arg name="drone_name" default="ardrone" />
 
-  <arg name="drone_name" default="local" />
-
-  <arg name="drone_ip" default="192.168.0.1" />
-
-  <arg name="drone_frame" default="/vicon/$(arg drone_name)/$(arg drone_name)" />
-
-  <arg name="target_frame" default="target_hull" />
-
-  <include file="$(find brl_parrots)/launch/basic_drone.launch">
+  <include file="$(find brl_parrots)/launch/ardrone_manual.launch">
     <arg name="panel" value="$(arg panel)" />
     <arg name="image" value="$(arg image)" />
     <arg name="drone_ip" value="$(arg drone_ip)" />
     <arg name="drone_name" value="$(arg drone_name)" />
   </include>
 
-  <group ns="$(arg drone_name)">
+  <param name="ctrl_drone_frame" type="string" value="$(arg drone_frame)" />
+  <param name="targ_drone_frame" type="string" value="$(arg target_frame)" />
 
-    <param name="ctrl_drone_frame" type="string" value="$(arg drone_frame)" />
-    <param name="targ_drone_frame" type="string" value="$(arg target_frame)" />
-
-    <node pkg="brl_drones" name="control" type="drone_tf_follow.py" >
+  <node pkg="brl_drones" name="control" type="drone_tf_follow.py" >
       <param name="pitch/init_gains/kp" type="double" value="0.5" />
       <param name="pitch/init_gains/ki" type="double" value="0.1" />
       <param name="pitch/init_gains/kd" type="double" value="0.25" />
@@ -40,21 +37,18 @@
       <param name="yaw/init_gains/kd" type="double" value="0.0" />
       <param name="yaw/init_limits/upper" type="double" value="0.3" />
       <param name="yaw/init_limits/lower" type="double" value="-0.3" />
-      <param name="height/init_gains/kp" type="double" value="0.3" />
+      <param name="height/init_gains/kp" type="double" value="0.5" />
       <param name="height/init_gains/ki" type="double" value="0.0" />
       <param name="height/init_gains/kd" type="double" value="0.0" />
       <param name="height/init_limits/upper" type="double" value="0.3" />
       <param name="height/init_limits/lower" type="double" value="-0.3" />
       
-      <remap from="ctrl_vel" to="/$(arg drone_name)/ext_vel" />
-    </node>
+      <remap from="ctrl_vel" to="ext_vel" />
+  </node>
 
-    <arg name="tuning" default="false" />
-    <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/pitch" />
-    <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/roll" />
-    <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/yaw" />
-    <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/height" />
-
-  </group>
+  <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/pitch" />
+  <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/roll" />
+  <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/yaw" />
+  <node pkg="brl_drones" if="$(arg tuning)" name="tuning" type="pid_tune_gui.py" ns="control/height" />
 
 </launch>

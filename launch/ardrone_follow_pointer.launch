@@ -1,0 +1,23 @@
+<launch>
+
+  <arg name="drone_ip" />
+  <arg name="drone_frame" />
+
+  <include file="$(find vicon_bridge)/launch/vicon.launch" />
+
+  <param name="static_frame" value="world" />
+  <param name="pointer_frame" value="vicon/WoodPointer/WoodPointer" />
+  <param name="drone_frame" value="$(arg drone_frame)" />
+  <node name="pointer_control" pkg="brl_drones" type="pointer_ctrl.py" output="screen" />
+
+  <include file="$(find brl_parrots)/launch/ardrone_follow_tf.launch">
+    <arg name="panel" value="True" />
+    <arg name="image" value="False" />
+    <arg name="drone_frame" value="$(arg drone_frame)"/>
+    <arg name="drone_ip" value="$(arg drone_ip)" />
+    <arg name="target_frame" value="target" />
+  </include>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find brl_drones)/urdf/drones.rviz" respawn="true" />
+
+</launch>
