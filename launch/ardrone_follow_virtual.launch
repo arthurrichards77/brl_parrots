@@ -2,6 +2,8 @@
 
   <arg name="drone_ip" />
   <arg name="drone_frame" />
+  <arg name="drone_name" default="ardrone" />
+  <arg name="image" default="false" />
 
   <include file="$(find vicon_bridge)/launch/vicon.launch" />
 
@@ -14,8 +16,9 @@
 
   <include file="$(find brl_parrots)/launch/ardrone_follow_tf.launch">
     <arg name="panel" value="True" />
-    <arg name="image" value="False" />
+    <arg name="image" value="$(arg image)" />
     <arg name="drone_frame" value="$(arg drone_frame)"/>
+    <arg name="drone_name" value="$(arg drone_name)"/>
     <arg name="drone_ip" value="$(arg drone_ip)" />
     <arg name="target_frame" value="target_hull" />
   </include>

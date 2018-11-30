@@ -1,2 +1,4 @@
+#carlton (green)
 ardrone2_206623 192.168.10.73
+#debbie (pink)
 ardrone2_206527 192.168.10.74

@@ -1,14 +1,15 @@
 <launch>
 
-  <!-- options: turn off control panel or turn on image viewer -->
   <arg name="panel" default="True" />
+
   <arg name="image" default="False" />
 
-  <include file="$(find brl_parrots)/launch/ardrone_manual.launch">
+  <include file="$(find brl_parrots)/launch/basic_drone.launch" pass_all_args="true">
+
     <arg name="drone_name" value="archie" />
+
     <arg name="drone_ip" value="192.168.10.71" />
-    <arg name="panel" value="$(arg panel)" />
-    <arg name="image" value="$(arg image)" />
+
   </include>
 
 </launch>

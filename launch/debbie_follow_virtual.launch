@@ -1,0 +1,10 @@
+<launch>
+
+  <include file="$(find brl_parrots)/launch/ardrone_follow_virtual.launch">
+    <arg name="drone_ip" value="192.168.10.74" />
+    <arg name="drone_frame" value="/vicon/Debbie/Debbie" />
+    <arg name="drone_name" value="Debbie" />
+    <arg name="image" value="false" />
+  </include>
+
+</launch>
