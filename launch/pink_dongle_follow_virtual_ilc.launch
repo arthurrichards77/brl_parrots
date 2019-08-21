@@ -21,6 +21,10 @@
     <arg name="target_frame" value="target" />
   </include>
 
+  <!-- turn off integral action - causing problems, and that's what the ILC is for anyway -->
+  <param name="control/pitch/init_gains/ki" type="double" value="0.0" />
+  <param name="control/roll/init_gains/ki" type="double" value="0.0" />
+
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find brl_drones)/urdf/drones.rviz" respawn="true" />
 
 </launch>
