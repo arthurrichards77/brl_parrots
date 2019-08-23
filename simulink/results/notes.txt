@@ -2,3 +2,19 @@
 1130: offset=10
 1137: rate=0.2
 1155: rate back to 0.1, ref speed doubled
+1520: rate 0.1, offset 10, ref slow -> unstable
+1526: rate 0.1, offset 2, ref slow -> OK but wobbly
+1538: rate 0.1, offset 4, same ref as before
+1544: rate 0.14, offset 3, increased height to 1.5m part way through
+1555: new M-shape reference, offset 3, rate 0.14
+1558: as 1555 but offset 1
+1602: offset 20 - better!
+1612: offset 15, rate 0.14
+1615: offset 20, rate .2
+1634: rate 0.1 offset 25
+1638: rate 0.1 offset 18
+1642: delta-t=0.5, offset=4, rate=0.1
+1654: turned back on integrators in ROS PID
+1656: offset 12
+1700: offset 12 rate .16
+1702: offset 20 rate .16
