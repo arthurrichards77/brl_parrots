@@ -12,6 +12,8 @@
 
   <node name="pos_to_tf" pkg="brl_drones" type="pos_to_tf.py" />
 
+  <node name="battery" pkg="brl_parrots" type="battery_monitor.sh" output="screen" />
+
   <include file="$(find brl_parrots)/launch/ardrone_follow_tf.launch">
     <arg name="panel" value="True" />
     <arg name="image" value="$(arg image)" />
