@@ -1,0 +1,21 @@
+1. Power up Vicon hub, run Tracker, and ensure drone Debbie is selected and
+   tracked as an object.
+2. Launch Matlab, open the drone_ilc model in Simulink, and (A) ensure it's 
+   stopped, with all switches UP
+3. Connect drone battery and connect WiFi to ardrone_xxxx network
+4. In terminal, roslaunch brl_parrots pink_dongle_follow_virtual_ilc.launch
+5. Check lights changed red/green when reset button pressed on panel
+6. Run the Simulink model and verify that the "target" frame shows in RViz
+7. On panel, click take off
+8. With drone roughly near target, verify external inputs look small, and 
+   select "External" checkbox.
+9. In Simulink, move rightmost switch down to shift drone on to reference.
+   Let it settle.
+10. In Simulink, wait for the start of a reference cycle, and move leftmost
+    switch down to start learning.
+11. At end of learning trial, click "Stop" on panel, and land if work to be
+    done. (Can keep flying if update is quick.)
+12. Stop model and reset all switches UP.
+13. In Matlab, run "arch_result" and log the test in text file.
+14. If not changing battery, adjust Simulink settings and repeat from 6.
+15. If changing battery, kill the roslaunch and repeat from 3.
