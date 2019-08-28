@@ -18,3 +18,10 @@
 1656: offset 12
 1700: offset 12 rate .16
 1702: offset 20 rate .16
+
+28th Aug
+
+0855: retuned PID in ROS - reduced oscillations.  offset 20 rate .16.  Looks good but slow learner.
+0924: rate .5 offset 20 changed to offset 12 after ~480s
+0938: rate .5 offset 5
+0956: rate .3 offset 5
