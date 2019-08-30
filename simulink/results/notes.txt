@@ -25,3 +25,9 @@
 0924: rate .5 offset 20 changed to offset 12 after ~480s
 0938: rate .5 offset 5
 0956: rate .3 offset 5
+
+30th Aug
+
+0859: retuned PID to KP 0.2, KD 0.5, to cut disturbance. Rate .3 offset 5.
+      Changed to rate .2 offset 3 right at the end - 600+ secs
+  

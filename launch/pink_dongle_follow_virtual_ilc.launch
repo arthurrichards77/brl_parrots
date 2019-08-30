@@ -28,10 +28,10 @@
   <param name="control/roll/init_gains/ki" type="double" value="0.0" />
 
   <!-- and retune to try and reduce oscillations -->
-  <param name="control/pitch/init_gains/kp" type="double" value="0.01" />
-  <param name="control/roll/init_gains/kp" type="double" value="0.01" />
-  <param name="control/pitch/init_gains/kd" type="double" value="0.1" />
-  <param name="control/roll/init_gains/kd" type="double" value="0.1" />
+  <param name="control/pitch/init_gains/kp" type="double" value="0.1" />
+  <param name="control/roll/init_gains/kp" type="double" value="0.1" />
+  <param name="control/pitch/init_gains/kd" type="double" value="0.3" />
+  <param name="control/roll/init_gains/kd" type="double" value="0.3" />
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find brl_drones)/urdf/drones.rviz" respawn="true" />
 
